@@ -58,7 +58,7 @@ scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.5)
 # early-stop
 early_stopping_patience = 60
 min_val_loss = float('inf')
-epochs_no_improve = 0
+epochs_no_improve = 15
 
 # train function
 def train_epoch(loader, model, criterion, optimizer, device):
@@ -123,7 +123,7 @@ for epoch in range(epochs):
     if valid_loss < min_val_loss:
         min_val_loss = valid_loss
         epochs_no_improve = 0
-        torch.save(net.state_dict(), '/home/yushan/adaptive_personalization/motivation_exp/model/resnet26_model.pth')
+        torch.save(net.state_dict(), 'resnet26_model.pth')
     else:
         epochs_no_improve += 1
         if epochs_no_improve == early_stopping_patience:
@@ -134,18 +134,8 @@ for epoch in range(epochs):
 print('Finished Training')
 
 # load the best model
-net.load_state_dict(torch.load('/home/yushan/adaptive_personalization/motivation_exp/model/resnet26_model.pth'))
+net.load_state_dict(torch.load('resnet26_model.pth'))
 
 # evaluation
 test_loss, test_acc = test_epoch(testloader, net, criterion, device)
 print(f"Test Loss: {test_loss:.4f}, Test Acc: {test_acc:.2f}%")
-
-# figure
-plt.figure(figsize=(10, 5))
-plt.plot(train_losses, label='Training Loss')
-plt.plot(valid_losses, label='Validation Loss')
-plt.title('Training and Validation Loss')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-plt.savefig('/home/yushan/adaptive_personalization/motivation_exp/fig/loss_curve.png')

@@ -11,11 +11,11 @@ To get started and download all dependencies, run:
 pip install -r requirements.txt 
 ```
 
-In addition, prepare the two datasets:
+In addition, please prepare the two datasets:
 
-[Cifar10-C](https://github.com/RobustBench/robustbench)[1]. 
+[Cifar10-C](https://github.com/RobustBench/robustbench) [1]. 
 
-[Living17](https://github.com/MadryLab/BREEDS-Benchmarks)[2].
+[Living17](https://github.com/MadryLab/BREEDS-Benchmarks) [2].
 
 ## 2. Motivation Experiments
 Table 1: Fine-tuning accuracy results on noised blocks. The bset block-based accuracy is highlighted.
@@ -24,9 +24,9 @@ Table 1: Fine-tuning accuracy results on noised blocks. The bset block-based acc
 
 The code is in `./motivation_exp`.
 
-First, train the model, shown as `./motivation_exp/train_origin_resnet.py`. 
+(1) Train the model, shown as `./motivation_exp/train_origin_resnet.py`. We also release the model utilised in our paper, please refer to `./motivation_exp/resnet26_model.pth`.
 
-We also release the model utilised in our paper, please refer to `./motivation_exp/resnet26_model.pth`
+(2) Add noise, shown as `./motivation_exp/add_noise_resnet.py`
 
 
 
