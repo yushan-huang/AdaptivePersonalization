@@ -1,11 +1,12 @@
 <p align="center">
-  <h1>Towards Low-Energy Adaptive Personalization for Resource-Constrained Devices</strong>
+  <h3>Towards Low-Energy Adaptive Personalization for Resource-Constrained Devices</strong>
 </p>
 
 
 <p align="center">
-  <strong><a href="LINK_TO_PAPER">Paper</a></strong>
+  <h5><a href="LINK_TO_PAPER">Paper</a></strong>
 </p>
+
 
 This repository includes the code required to reproduce the experiments and figures in the paper:
 
