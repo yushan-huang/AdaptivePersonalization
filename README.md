@@ -94,7 +94,7 @@ The original model here is same with the original model in Motivation Experiment
 The time and energy costs of block-based and full model fine-tuning. The Energy-SavingRate is calculated by comparing the current energy cost to the energy cost of full model fine-tuning.
 
 <div align="center">
-<img src="./figure/energy.png" width="400"> 
+<img src="./figure/energy.png" width="700"> 
 </div>
 
 For the System Cost, please refer to the paper for further details.
@@ -115,7 +115,7 @@ If you found our work useful please consider citing it:
 
 ## Acknowledgments
 
-Our paper and code partially reference, Robustbench [1], Breeds [2], Surgical Fine-Tuning [3], and MEMO [4]. and we would like to thank them for open-sourcing their codebase, which we have built off of.
+Our paper and code partially reference Robustbench [1], Breeds [2], Surgical Fine-Tuning [3], and MEMO [4]. We would like to express our gratitude for their open-sourcing of the codebase, which served as the foundation for our work.
 
 
 ## References
