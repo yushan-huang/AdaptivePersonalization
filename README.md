@@ -18,7 +18,8 @@ In addition, please prepare the two datasets:
 [Living17](https://github.com/MadryLab/BREEDS-Benchmarks) [2].
 
 ## 2. Motivation Experiments
-Table 1: Fine-tuning accuracy results on noised blocks. The bset block-based accuracy is highlighted.
+
+Fine-tuning accuracy results on noised blocks. The bset block-based accuracy is highlighted.
 
 <img src="./figure/motivation_result.png" width="400"> 
 
@@ -29,9 +30,14 @@ The code is in `./motivation_exp`.
 (2) Add noise and finetune, shown as `./motivation_exp/add_noise_resnet.py`.
 
 ## 2. Motivation Experiments
+
 ### 2.1 Cifar10-C
 
 ### 2.2 Living17
+
+The experimental results for the Living17 dataset.
+
+<img src="./figure/Living17_result.png" width="400"> 
 
 The code is in `./main_exp/Living17`.
 
