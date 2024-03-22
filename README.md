@@ -87,7 +87,7 @@ The experimental results for the Cifar-Flip dataset.
 <img src="./figure/cifarflip_result.png" width="400"> 
 </div>
 
-The original model here is same with the original model in Motivation Experiments (trained on cifar10).
+The original model here is same with the original model in Motivation Experiments (trained on Cifar10).
 
 ### 2.4 System Cost
 
