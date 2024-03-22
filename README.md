@@ -29,7 +29,7 @@ The code is in `./motivation_exp`.
 
 (2) Add noise and finetune, shown as `./motivation_exp/add_noise_resnet.py`.
 
-## 2. Motivation Experiments
+## 2. Main Experiments
 
 ### 2.1 Cifar10-C
 
@@ -55,6 +55,9 @@ The code is in `./main_exp/Living17`.
 
 ### 2.3 Cifar-Flip
 
+The experimental results for the Cifar-Flip dataset.
+
+<img src="./figure/cifarflip_result.png" width="400"> 
 
 
 ## Citation
@@ -70,7 +73,7 @@ If you found our work useful please consider citing it:
 }
 ```
 
-```markdown
+
 [1] Croce, F., Andriushchenko, M., Sehwag, V., Debenedetti, E., Flammarion, N., Chiang, M., Mittal, P. and Hein, M., 2020. Robustbench: a standardized adversarial robustness benchmark. arXiv preprint arXiv:2010.09670.
 
 [2] Santurkar, S., Tsipras, D. and Madry, A., 2020. Breeds: Benchmarks for subpopulation shift. arXiv preprint arXiv:2008.04859.
