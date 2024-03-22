@@ -4,15 +4,16 @@ import torch.nn as nn
 import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
-from torch.utils.data import DataLoader, random_split, ConcatDataset
+from torch.utils.data import DataLoader, random_split, ConcatDataset, Subset
 from ResNet import ResNetCifar  # make sure in the same folder
 from tqdm import tqdm
 import matplotlib.pyplot as plt
+from itertools import chain
 
-# define hyperpara
+
+
+# define initial hyperpara
 batch_size = 128
-epochs = 300
-learning_rate = 0.01
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # preprocessing
@@ -33,7 +34,14 @@ te_transforms = transforms.Compose([
 trainset = torchvision.datasets.CIFAR10(root='./data', train=True, download=True, transform=tr_transforms)
 testset = torchvision.datasets.CIFAR10(root='./data', train=False, download=True, transform=te_transforms)
 
-# split dataset
+# utilize 1/10 original trainset to mimic fewer local samples 
+subset_size = len(trainset) // 10
+indices = torch.randperm(len(trainset)).tolist()
+subset_indices = indices[:subset_size]
+subset_trainset = Subset(trainset, subset_indices)
+subset_trainloader = DataLoader(subset_trainset, batch_size=batch_size, shuffle=True, num_workers=10)
+
+# split valid and test dataset
 test_size = len(testset) // 2
 valid_size = len(testset) - test_size
 test_dataset, valid_dataset = random_split(testset, [test_size, valid_size], generator=torch.Generator().manual_seed(123))
@@ -42,25 +50,16 @@ trainloader = DataLoader(trainset, batch_size=batch_size, shuffle=True, num_work
 validloader = DataLoader(valid_dataset, batch_size=batch_size, shuffle=False, num_workers=10)
 testloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=10)
 
-# initial model
+
 net = ResNetCifar(depth=26).to(device)
-# net = ResNetCifar(26, 1, channels=3, classes=10, norm_layer=gn_helper).cuda()
 
 # define model
 criterion = nn.CrossEntropyLoss()
-# optimizer = optim.AdamW(net.parameters(), lr=learning_rate, weight_decay=5e-4)
-optimizer = optim.SGD(net.parameters(), lr=learning_rate, momentum=0.9, weight_decay=5e-4)
-# scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=300)
-scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.5)
+
+# load model
+net.load_state_dict(torch.load('/home/yushan/adaptive_personalization/motivation_exp/model/resnet26_model.pth'))
 
 
-
-# early-stop
-early_stopping_patience = 60
-min_val_loss = float('inf')
-epochs_no_improve = 0
-
-# train function
 def train_epoch(loader, model, criterion, optimizer, device):
     model.train()
     running_loss = 0.0
@@ -82,6 +81,7 @@ def train_epoch(loader, model, criterion, optimizer, device):
     train_acc = 100. * correct / total
     return train_loss, train_acc
 
+
 # test function
 def test_epoch(loader, model, criterion, device):
     model.eval()
@@ -102,15 +102,42 @@ def test_epoch(loader, model, criterion, device):
     test_acc = 100. * correct / total
     return test_loss, test_acc
 
+def add_noise_to_layer(layer, std_dev=0.01):
+    with torch.no_grad(): 
+        for param in layer.parameters():
+            noise = torch.randn_like(param) * std_dev 
+            param.add_(noise)  
+
+
+# test acc without noise
+_, acc_without_noise = test_epoch(testloader, net, criterion, device)
+
+# Add noise
+# add_noise_to_layer(net.conv1, std_dev=0.15)
+# add_noise_to_layer(net.layer1, std_dev=0.15)
+
+add_noise_to_layer(net.fc, std_dev=6)
+
+_, acc_with_noise = test_epoch(testloader, net, criterion, device)
+print(acc_without_noise, acc_with_noise)
+
+# only fine-tune certain layer
+learning_rate_ft = 0.001
+conv1_layer1 = chain(net.conv1.parameters(), net.layer1.parameters())
+# optimizer_ft = optim.SGD(conv1_layer1, lr=learning_rate_ft, momentum=0.9, weight_decay=5e-4)
+optimizer_ft = optim.SGD(net.parameters(), lr=learning_rate_ft, momentum=0.9, weight_decay=5e-4)
+fine_tune_epochs = 50
+early_stopping_patience = 30
+min_val_loss = float('inf')
 
 # store the loss values
 train_losses = []
 valid_losses = []
 
 # train model
-for epoch in range(epochs):
-    print(f"Epoch {epoch+1}/{epochs}")
-    train_loss, train_acc = train_epoch(trainloader, net, criterion, optimizer, device)
+for epoch in range(fine_tune_epochs):
+    print(f"Epoch {epoch+1}/{fine_tune_epochs}")
+    train_loss, train_acc = train_epoch(subset_trainloader, net, criterion, optimizer_ft, device)
     valid_loss, valid_acc = test_epoch(validloader, net, criterion, device)
     print(f"Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.2f}%")
     print(f"Validation Loss: {valid_loss:.4f}, Validation Acc: {valid_acc:.2f}%")
@@ -123,24 +150,24 @@ for epoch in range(epochs):
     if valid_loss < min_val_loss:
         min_val_loss = valid_loss
         epochs_no_improve = 0
-        torch.save(net.state_dict(), '/home/yushan/adaptive_personalization/motivation_exp/model/resnet26_model.pth')
+        torch.save(net.state_dict(), '/home/yushan/adaptive_personalization/motivation_exp/model/resnet26_model_ft_l3.pth')
     else:
         epochs_no_improve += 1
         if epochs_no_improve == early_stopping_patience:
             print('Early stopping!')
             break
-    scheduler.step()
 
 print('Finished Training')
 
+
 # load the best model
-net.load_state_dict(torch.load('/home/yushan/adaptive_personalization/motivation_exp/model/resnet26_model.pth'))
+net.load_state_dict(torch.load('/home/yushan/adaptive_personalization/motivation_exp/model/resnet26_model_ft_l3.pth'))
 
 # evaluation
 test_loss, test_acc = test_epoch(testloader, net, criterion, device)
 print(f"Test Loss: {test_loss:.4f}, Test Acc: {test_acc:.2f}%")
 
-# 绘制损失曲线
+# figure
 plt.figure(figsize=(10, 5))
 plt.plot(train_losses, label='Training Loss')
 plt.plot(valid_losses, label='Validation Loss')
@@ -148,4 +175,5 @@ plt.title('Training and Validation Loss')
 plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.legend()
-plt.savefig('/home/yushan/adaptive_personalization/motivation_exp/fig/loss_curve.png')
+plt.savefig('/home/yushan/adaptive_personalization/motivation_exp/fig/loss_single.png')
+
