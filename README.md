@@ -14,7 +14,7 @@ Accepted to *[The 4th Workshop on Machine Learning and Systems (EuroMLSys '24), 
 The personalization of machine learning (ML) models to address data drift is a significant challenge in the context of Internet of Things (IoT) applications. Presently, most approaches focus on fine-tuning either the full base model or its last few layers to adapt to new data, while often neglecting energy costs. However, various types of data drift exist, and fine-tuning the full base model or the last few layers may not result in optimal performance in certain scenarios. We propose Target Block Fine-Tuning (TBFT), a low-energy adaptive personalization framework designed for resource-constrained devices. We categorize data drift and personalization into three types: input-level, feature-level, and output-level. For each type, we fine-tune different blocks of the model to achieve optimal performance with reduced energy costs. Specifically, input-, feature-, and output-level correspond to fine-tuning the front, middle, and rear blocks of the model. We evaluate TBFT on a ResNet model, three datasets, three different training sizes, and a Raspberry Pi. Compared with the $Block Avg$, where each block is fine-tuned individually and their performance improvements are averaged, TBFT exhibits an improvement in model accuracy by an average of 15.30\% whilst saving 41.57\% energy consumption on average compared with full fine-tuning.
 
 <div align="center">
-<img src="./figure/overview.png" width="300"> 
+<img src="./figure/overview.png" width="320"> 
 </div>
 
 <div align="center">
@@ -38,7 +38,9 @@ In addition, please prepare the two datasets:
 
 Fine-tuning accuracy results on noised blocks. The bset block-based accuracy is highlighted.
 
+<div align="center">
 <img src="./figure/motivation_result.png" width="400"> 
+</div>
 
 The code is in `./motivation_exp`.
 
@@ -52,7 +54,9 @@ The code is in `./motivation_exp`.
 
 The experimental results for the Cifar10-C dataset.
 
+<div align="center">
 <img src="./figure/cifar10c_result.png" width="400"> 
+</div>
 
 The original model here is same with the original model in Motivation Experiments (trained on Cifar10).
 
@@ -64,7 +68,9 @@ The original model here is same with the original model in Motivation Experiment
 
 The experimental results for the Living17 dataset.
 
+<div align="center">
 <img src="./figure/Living17_result.png" width="400"> 
+</div>
 
 The code is in `./main_exp/Living17`.
 
@@ -76,7 +82,9 @@ The code is in `./main_exp/Living17`.
 
 The experimental results for the Cifar-Flip dataset.
 
+<div align="center">
 <img src="./figure/cifarflip_result.png" width="400"> 
+</div>
 
 The original model here is same with the original model in Motivation Experiments (trained on cifar10).
 
