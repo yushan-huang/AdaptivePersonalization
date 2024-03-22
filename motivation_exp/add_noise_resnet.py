@@ -57,7 +57,7 @@ net = ResNetCifar(depth=26).to(device)
 criterion = nn.CrossEntropyLoss()
 
 # load model
-net.load_state_dict(torch.load('/home/yushan/adaptive_personalization/motivation_exp/model/resnet26_model.pth'))
+net.load_state_dict(torch.load('resnet26_model.pth'))
 
 
 def train_epoch(loader, model, criterion, optimizer, device):
@@ -113,21 +113,16 @@ def add_noise_to_layer(layer, std_dev=0.01):
 _, acc_without_noise = test_epoch(testloader, net, criterion, device)
 
 # Add noise
-# add_noise_to_layer(net.conv1, std_dev=0.15)
-# add_noise_to_layer(net.layer1, std_dev=0.15)
-
-add_noise_to_layer(net.fc, std_dev=6)
+add_noise_to_layer(net.fc, std_dev=6) # Please revise the correct tested layer name, and revise the 'std_dev' to keep the noised model's accuracy around a same standard
 
 _, acc_with_noise = test_epoch(testloader, net, criterion, device)
 print(acc_without_noise, acc_with_noise)
 
 # only fine-tune certain layer
-learning_rate_ft = 0.001
-conv1_layer1 = chain(net.conv1.parameters(), net.layer1.parameters())
-# optimizer_ft = optim.SGD(conv1_layer1, lr=learning_rate_ft, momentum=0.9, weight_decay=5e-4)
-optimizer_ft = optim.SGD(net.parameters(), lr=learning_rate_ft, momentum=0.9, weight_decay=5e-4)
+learning_rate_ft = 0.001 # FC layer 0.01, the other layer(s) 0.001
+optimizer_ft = optim.SGD(net.fc.parameters(), lr=learning_rate_ft, momentum=0.9, weight_decay=5e-4)
 fine_tune_epochs = 50
-early_stopping_patience = 30
+early_stopping_patience = 20
 min_val_loss = float('inf')
 
 # store the loss values
@@ -150,7 +145,7 @@ for epoch in range(fine_tune_epochs):
     if valid_loss < min_val_loss:
         min_val_loss = valid_loss
         epochs_no_improve = 0
-        torch.save(net.state_dict(), '/home/yushan/adaptive_personalization/motivation_exp/model/resnet26_model_ft_l3.pth')
+        torch.save(net.state_dict(), 'resnet26_model_ft_fc.pth')
     else:
         epochs_no_improve += 1
         if epochs_no_improve == early_stopping_patience:
@@ -161,19 +156,10 @@ print('Finished Training')
 
 
 # load the best model
-net.load_state_dict(torch.load('/home/yushan/adaptive_personalization/motivation_exp/model/resnet26_model_ft_l3.pth'))
+net.load_state_dict(torch.load('resnet26_model_ft_fc.pth'))
 
 # evaluation
 test_loss, test_acc = test_epoch(testloader, net, criterion, device)
 print(f"Test Loss: {test_loss:.4f}, Test Acc: {test_acc:.2f}%")
 
-# figure
-plt.figure(figsize=(10, 5))
-plt.plot(train_losses, label='Training Loss')
-plt.plot(valid_losses, label='Validation Loss')
-plt.title('Training and Validation Loss')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-plt.savefig('/home/yushan/adaptive_personalization/motivation_exp/fig/loss_single.png')
 
