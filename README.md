@@ -2,8 +2,11 @@
   <h1>Towards Low-Energy Adaptive Personalization for Resource-Constrained Devices</h1>
 </p>
 
+<p align="center">
+  <strong><a href="LINK_TO_PAPER">[Paper]</a></strong>
+</p>
 
-Accepted to *[The 4th Workshop on Machine Learning and Systems (EuroMLSys '24), co-located with EuroSys '24](https://euromlsys.eu/).* [Paper]().
+Accepted to *[The 4th Workshop on Machine Learning and Systems (EuroMLSys '24), co-located with EuroSys '24](https://euromlsys.eu/).*
 
 
 ## Introduction 
