@@ -89,6 +89,15 @@ The experimental results for the Cifar-Flip dataset.
 
 The original model here is same with the original model in Motivation Experiments (trained on cifar10).
 
+### 2.4 System Cost
+
+The time and energy costs of block-based and full model fine-tuning. The Energy-SavingRate is calculated by comparing the current energy cost to the energy cost of full model fine-tuning.
+
+<div align="center">
+<img src="./figure/energy.png" width="400"> 
+</div>
+
+For the System Cost, please refer to the paper for further details.
 
 
 ## Citation
@@ -104,10 +113,20 @@ If you found our work useful please consider citing it:
 }
 ```
 
+## Acknowledgments
+
+Our paper and code partially reference, Robustbench [1], Breeds [2], Surgical Fine-Tuning [3], and MEMO [4]. and we would like to thank them for open-sourcing their codebase, which we have built off of.
+
+
+## References
 
 [1] Croce, F., Andriushchenko, M., Sehwag, V., Debenedetti, E., Flammarion, N., Chiang, M., Mittal, P. and Hein, M., 2020. Robustbench: a standardized adversarial robustness benchmark. arXiv preprint arXiv:2010.09670.
 
 [2] Santurkar, S., Tsipras, D. and Madry, A., 2020. Breeds: Benchmarks for subpopulation shift. arXiv preprint arXiv:2008.04859.
+
+[3] Lee, Y., Chen, A.S., Tajwar, F., Kumar, A., Yao, H., Liang, P. and Finn, C., 2022. Surgical fine-tuning improves adaptation to distribution shifts. arXiv preprint arXiv:2210.11466.
+
+[4] Zhang, M., Levine, S. and Finn, C., 2022. Memo: Test time robustness via adaptation and augmentation. Advances in neural information processing systems, 35, pp.38629-38642.
 
 
 
