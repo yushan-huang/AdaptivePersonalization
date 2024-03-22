@@ -1,11 +1,11 @@
-
 <p align="center">
-  <strong><a href="LINK_TO_PAPER">Hydra: Sequentially Dependent Draft Heads for Medusa Decoding</a></strong>
+# Towards Low-Energy Adaptive Personalization for Resource-Constrained Devices
 </p>
 
+<p align="center">
+  <strong><a href="LINK_TO_PAPER">Paper</a></strong>
+</p>
 
-
-# Towards Low-Energy Adaptive Personalization for Resource-Constrained Devices
 This repository includes the code required to reproduce the experiments and figures in the paper:
 
 Yushan Huang, Josh Millar, Yuxuan Long, Yuchen Zhao, Hamed Haddadi. "Towards Low-Energy Adaptive Personalization for Resource-Constrained Devices." Accepted to *[The 4th Workshop on Machine Learning and Systems (EuroMLSys '24), co-located with EuroSys '24](https://euromlsys.eu/).* [Paper]().
