@@ -5,6 +5,7 @@
 
 <p align="center">
   <strong><a href="LINK_TO_PAPER">[Paper]</a></strong>
+  <strong><a href="https://netsys.doc.ic.ac.uk/">[Team]</a></strong>
 </p>
 
 Accepted to *[The 4th Workshop on Machine Learning and Systems (EuroMLSys '24), co-located with EuroSys '24](https://euromlsys.eu/).*
