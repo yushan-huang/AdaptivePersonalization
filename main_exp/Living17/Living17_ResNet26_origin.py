@@ -47,18 +47,18 @@ if reload_flag == 0:
     train_subclasses, test_subclasses = subclass_split
 
     # Save index information to reload
-    with open('/home/yushan/adaptive_personalization/main_exp/dataset/Living17/train_subclasses.json', 'w') as f:
+    with open('train_subclasses.json', 'w') as f:
         json.dump(train_subclasses, f)
 
-    with open('/home/yushan/adaptive_personalization/main_exp/dataset/Living17/test_subclasses.json', 'w') as f:
+    with open('test_subclasses.json', 'w') as f:
         json.dump(test_subclasses, f)
 
 elif reload_flag == 1:
     # Load index information
-    with open('/home/yushan/adaptive_personalization/main_exp/dataset/Living17/train_subclasses.json', 'r') as f:
+    with open('train_subclasses.json', 'r') as f:
         train_subclasses = json.load(f)
 
-    with open('/home/yushan/adaptive_personalization/main_exp/dataset/Living17/test_subclasses.json', 'r') as f:
+    with open('test_subclasses.json', 'r') as f:
         test_subclasses = json.load(f)
 
     # Generate DataLoaders
@@ -92,7 +92,7 @@ model.to(device)
 
 # Define training para
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.AdamW(model.parameters(), lr=2e-3, weight_decay=5e-3)
+optimizer = optim.Adam(model.parameters(), lr=2e-3, weight_decay=5e-3)
 scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=25, gamma=0.5)
 
 # define training and evaluation function
@@ -155,33 +155,14 @@ def train_model(model, train_loader, val_loader, epochs, criterion, optimizer, t
     # save the best model
     if train_full == True:
         if best_model_state is not None:
-            model_filename = f"/home/yushan/adaptive_personalization/main_exp/model/ResNet26_origin_Living17_val_acc_{val_accuracies[-1]:.4f}.pth"
+            model_filename = f"ResNet26_origin_Living17_val_acc_{val_accuracies[-1]:.4f}.pth"
             torch.save(best_model_state, model_filename)
             print(f"Best model saved as {model_filename}")
     
     return train_losses, val_losses, val_accuracies, model
 
-def plt_figure(train_losses, val_losses, val_accuracies):
-    plt.figure(figsize=(10, 5))
-    plt.plot(train_losses, label='Train Loss')
-    plt.plot(val_losses, label='Validation Loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.title(f'Test Accuracy: {val_accuracies[-1]:.4f}')
-    plt.legend()
-    plt.savefig(f'/home/yushan/adaptive_personalization/main_exp/fig/loss_ResNet26_Living17_origin.png')
 
-# # First stage: only fine-tune the head (fc)
-# for param in model.parameters():
-#     param.requires_grad = False
-# for param in model.fc_add.parameters():
-#     param.requires_grad = True
-
-# epochs_head = 5
 epochs = 75
 
 train_losses, val_losses, val_accuracies,_ = train_model(model, train_loader_source, val_loader_source, epochs, criterion, optimizer, train_full=True) 
-plt_figure(train_losses, val_losses, val_accuracies)
 
-# # save original model
-# torch.save(model.state_dict(), '/home/yushan/adaptive_personalization/main_exp/model/ResNet50_Living17_origin_scratch.pth')

@@ -24,9 +24,22 @@ Table 1: Fine-tuning accuracy results on noised blocks. The bset block-based acc
 
 The code is in `./motivation_exp`.
 
-(1) Train the model, shown as `./motivation_exp/train_origin_resnet.py`. We also release the model utilised in our paper, please refer to `./motivation_exp/resnet26_model.pth`.
+(1) Train the original model, shown as `./motivation_exp/train_origin_resnet.py`. We also release the model utilised in our paper, please refer to `./motivation_exp/resnet26_model.pth`.
 
-(2) Add noise, shown as `./motivation_exp/add_noise_resnet.py`
+(2) Add noise and finetune, shown as `./motivation_exp/add_noise_resnet.py`.
+
+## 2. Motivation Experiments
+### 2.1 Cifar10-C
+
+### 2.2 Living17
+
+The code is in `./main_exp/Living17`.
+
+(1) Train the original model, shown as `./main_exp/Living17/Living17_ResNet26_origin.py`. We also release the model for Living17 dataset utilised in our paper, please refer to `./main_exp/Living17/ResNet26_origin_Living17`.
+
+(2) Add noise and finetune, shown as `./main_exp/Living17/Living17_ResNet26_finetune.py`.
+
+### 2.3 Cifar-Flip
 
 
 
