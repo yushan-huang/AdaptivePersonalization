@@ -33,6 +33,14 @@ The code is in `./motivation_exp`.
 
 ### 2.1 Cifar10-C
 
+The experimental results for the Cifar10-C dataset.
+
+<img src="./figure/cifar10c_result.png" width="400"> 
+
+
+
+
+
 ### 2.2 Living17
 
 The experimental results for the Living17 dataset.
@@ -41,7 +49,7 @@ The experimental results for the Living17 dataset.
 
 The code is in `./main_exp/Living17`.
 
-(1) Train the original model, shown as `./main_exp/Living17/Living17_ResNet26_origin.py`. We also release the model for Living17 dataset utilised in our paper, please refer to `./main_exp/Living17/ResNet26_origin_Living17`.
+(1) Train the original model, shown as `./main_exp/Living17/Living17_ResNet26_origin.py`. We also release the model for Living17 dataset utilised in our paper, please refer to `./main_exp/Living17/ResNet26_origin_Living17.pth`.
 
 (2) Add noise and finetune, shown as `./main_exp/Living17/Living17_ResNet26_finetune.py`.
 
@@ -49,7 +57,20 @@ The code is in `./main_exp/Living17`.
 
 
 
+## Citation
 
+If you found our work useful please consider citing it:
+
+```bibtex
+@article{huang2024,
+  title={Towards Low-Energy Adaptive Personalization for Resource-Constrained Devices},
+  author={Yushan Huang, Josh Millar, Yuxuan Long, Yuchen Zhao, Hamed Haddadi},
+  year={2024},
+  publisher={Arxiv.}
+}
+```
+
+```markdown
 [1] Croce, F., Andriushchenko, M., Sehwag, V., Debenedetti, E., Flammarion, N., Chiang, M., Mittal, P. and Hein, M., 2020. Robustbench: a standardized adversarial robustness benchmark. arXiv preprint arXiv:2010.09670.
 
 [2] Santurkar, S., Tsipras, D. and Madry, A., 2020. Breeds: Benchmarks for subpopulation shift. arXiv preprint arXiv:2008.04859.
