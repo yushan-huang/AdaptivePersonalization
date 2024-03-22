@@ -124,7 +124,7 @@ Our paper and code partially reference Robustbench [1], Breeds [2], Surgical Fin
 
 [2] Santurkar, S., Tsipras, D. and Madry, A., 2020. Breeds: Benchmarks for subpopulation shift. arXiv preprint arXiv:2008.04859.
 
-[3] Lee, Y., Chen, A.S., Tajwar, F., Kumar, A., Yao, H., Liang, P. and Finn, C., 2022. Surgical fine-tuning improves adaptation to distribution shifts. arXiv preprint arXiv:2210.11466.
+[3] Lee, Y., Chen, A.S., Tajwar, F., Kumar, A., Yao, H., Liang, P. and Finn, C., 2022, September. Surgical Fine-Tuning Improves Adaptation to Distribution Shifts. In The Eleventh International Conference on Learning Representations.
 
 [4] Zhang, M., Levine, S. and Finn, C., 2022. Memo: Test time robustness via adaptation and augmentation. Advances in neural information processing systems, 35, pp.38629-38642.
 
