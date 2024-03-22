@@ -1,6 +1,7 @@
-<p align="center">
+<div align="center">
   <h1>Towards Low-Energy Adaptive Personalization for Resource-Constrained Devices</h1>
-</p>
+</div>
+
 
 <p align="center">
   <strong><a href="LINK_TO_PAPER">[Paper]</a></strong>
