@@ -17,6 +17,10 @@ The personalization of machine learning (ML) models to address data drift is a s
 <img src="./figure/overview.png" width="400"> 
 </div>
 
+<div align="center">
+  <h4>System Overviw</h4>
+</div>
+
 ## 1. Requirements
 To get started and download all dependencies, run:
 
