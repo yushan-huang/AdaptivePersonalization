@@ -21,7 +21,7 @@ import pickle
 import csv
 import os
 
-from ResNet import ResNetCifar
+from ResNet import ResNetCifar # adjust if necessary
 
 CORRUPTIONS = ("shot_noise", "motion_blur", "snow", "pixelate", 
                "gaussian_noise", "defocus_blur", "brightness", 

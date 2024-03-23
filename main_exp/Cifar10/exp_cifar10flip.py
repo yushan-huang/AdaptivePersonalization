@@ -21,7 +21,7 @@ import pickle
 import csv
 import os
 
-from ResNet import ResNetCifar
+from ResNet import ResNetCifar # adjust if necessary
 
 def train_epoch(loader, model, criterion, optimizer, device):
     model.train()
@@ -100,10 +100,10 @@ if __name__ == "__main__":
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--net_path', type=str, default='./resnets/resnet26_cifar10.pth')
-    parser.add_argument('--ft_net_path', type=str, default='./resnets/resnet26_cifar10flip.pth')
-    parser.add_argument('--cifar_path', type=str, default="./cifar/cifar-10-batches-py/")
-    parser.add_argument('--results_path', type=str, default="./results/resnet26_cifar10flip.csv")
+    parser.add_argument('--net_path', type=str, default='../../motivation_exp/resnet26_model.pth')
+    parser.add_argument('--ft_net_path', type=str, default='./resnet26_cifar10flip.pth')
+    parser.add_argument('--cifar_path', type=str, default="./cifar-10-batches-py/")
+    parser.add_argument('--results_path', type=str, default="./resnet26_cifar10flip.csv")
     parser.add_argument('--batch_size', type=int, default=128)
     parser.add_argument('--ft_epochs', type=int, default=10)
     parser.add_argument('--early_stopping_patience', type=int, default=5)

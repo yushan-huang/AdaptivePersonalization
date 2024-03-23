@@ -61,9 +61,7 @@ The experimental results for the Cifar10-C dataset.
 
 The original model here is same with the original model in Motivation Experiments (trained on Cifar10).
 
-
-
-
+To run, use `python ./exp_cifar10c.py` with appropriate model and parameters (see `exp_cifar10c.py` 113-123 for defaults).
 
 ### 2.2 Living17
 
@@ -88,6 +86,8 @@ The experimental results for the Cifar-Flip dataset.
 </div>
 
 The original model here is same with the original model in Motivation Experiments (trained on Cifar10).
+
+To run, use `python ./exp_cifar10flip.py` with the appropriate model and parameters (see `exp_cifar10flip.py` 101-111 for defaults).
 
 ### 2.4 System Cost
 
