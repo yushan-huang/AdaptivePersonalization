@@ -94,7 +94,7 @@ To run, use `python ./exp_cifar10flip.py` with the appropriate model and paramet
 The time and energy costs of block-based and full model fine-tuning. The Energy-SavingRate is calculated by comparing the current energy cost to the energy cost of full model fine-tuning.
 
 <div align="center">
-<img src="./figure/energyall.png" width="700"> 
+<img src="./figure/systemcost.png" width="700"> 
 </div>
 
 For the System Cost, please refer to the paper for further details.
