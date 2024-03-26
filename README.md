@@ -4,7 +4,7 @@
 
 
 <p align="center">
-  <strong><a href="LINK_TO_PAPER">[Paper]</a></strong>
+  <strong><a href="https://arxiv.org/abs/2403.15905">[Paper]</a></strong>
   <strong><a href="https://netsys.doc.ic.ac.uk/">[Team]</a></strong>
 </p>
 
@@ -105,11 +105,13 @@ For the System Cost, please refer to the paper for further details.
 If you found our work useful please consider citing it:
 
 ```bibtex
-@article{huang2024,
-  title={Towards Low-Energy Adaptive Personalization for Resource-Constrained Devices},
-  author={Yushan Huang, Josh Millar, Yuxuan Long, Yuchen Zhao, Hamed Haddadi},
-  year={2024},
-  publisher={Arxiv.}
+@misc{huang2024lowenergy,
+      title={Towards Low-Energy Adaptive Personalization for Resource-Constrained Devices}, 
+      author={Yushan Huang and Josh Millar and Yuxuan Long and Yuchen Zhao and Hamed Hadaddi},
+      year={2024},
+      eprint={2403.15905},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
 }
 ```
 
